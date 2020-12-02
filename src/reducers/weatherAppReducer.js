@@ -12,10 +12,10 @@ const reducer = (state, action) => {
         currentWeather: action.payload,
       };
 
-    case "SetWeatherData":
+    case "SetForecastWeatherData":
       return {
         ...state,
-        weatherData: action.payload,
+        forecastWeatherData: action.payload,
       };
 
     case "Loading":

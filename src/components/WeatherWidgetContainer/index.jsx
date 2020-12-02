@@ -1,15 +1,18 @@
 import React, { useEffect, useContext } from "react";
 
-import WeatherCard from "../WeatherCard";
 import CurrentLocationCard from "../CurrentLocationCard";
 import { AppContext, DispatchContext } from "../../context/appContext";
 import "./WeatherWidgetContainerStyles.css";
 import apiKeys from "../../utils/apiKeys";
-import { useFetch } from "../../hooks/useFetch";
+import axios from "axios";
+import WeatherCardContainer from "../WeatherCardContainer";
 
 export default function WeatherWidgetContainer() {
   // We get the location of the user. then set this data into context.
   // we then set the lat long into context so that child components can work off it.
+  const dispatch = useContext(DispatchContext);
+
+  const appContext = useContext(AppContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -18,11 +21,19 @@ export default function WeatherWidgetContainer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const dispatch = useContext(DispatchContext);
-
-  const appContext = useContext(AppContext);
+  // watch for lat data changing and then reload the new weather data for the new lat / long
+  useEffect(() => {
+    console.log("++++++++ lat changed ", appContext.lat);
+    if (appContext.lat) {
+      SetCurrentLocationWeather(appContext.lat, appContext.long);
+      SetForcastWeather(appContext.lat, appContext.long);
+    }
+  }, [appContext.lat]);
 
   const getLocation = async () => {
+    let lat;
+    let long;
+
     await navigator.geolocation.getCurrentPosition(
       (position) => {
         dispatch({ type: "SetGeoData", payload: position });
@@ -34,7 +45,8 @@ export default function WeatherWidgetContainer() {
           },
         });
         console.log(position);
-        GetCurrentLocationWeather();
+
+        console.log("context in get location is ", appContext);
       },
       (error) => {
         dispatch({ type: "error" });
@@ -44,24 +56,40 @@ export default function WeatherWidgetContainer() {
     return;
   };
 
-  const GetCurrentLocationWeather = async () => {
-    const res = await fetch(
-      `${apiKeys.base}current?key=${apiKeys.key}&lat=${appContext.lat}&lon=${appContext.long}`
-    );
-    const json = await res.json();
+  const SetCurrentLocationWeather = async (lat, long) => {
+    try {
+      console.log("context in Get current location weather is ", appContext);
+      const data = await axios(
+        `${apiKeys.base}current?key=${apiKeys.key}&lat=${lat}&lon=${long}`
+      );
+      //const json = await res.json();
+      console.log("data is ", data);
 
-    const { data } = json;
+      dispatch({ type: "SetCurrentWeather", payload: data.data.data[0] });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    // save to context for potential deep child consumer components.
-    console.log("data is", data[0]);
-    dispatch({ type: "SetCurrentWeather", payload: data[0] });
+  const SetForcastWeather = async (lat, long) => {
+    try {
+      const data = await axios(
+        `${apiKeys.base}forecast/daily?key=${apiKeys.key}&lat=${lat}&lon=${long}&days=7`
+      );
+
+      console.log("FORECASE data is ", data);
+
+      dispatch({ type: "SetForecastWeatherData", payload: data.data.data });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <div>weather widget container</div>
       <CurrentLocationCard />
-      <WeatherCard />
+      <WeatherCardContainer />
     </>
   );
 }

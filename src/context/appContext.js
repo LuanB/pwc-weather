@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from "react";
 import weatherAppReducer from "../reducers/weatherAppReducer";
 
 const initialState = {
-  weatherData: [],
+  forecastWeatherData: null,
   isLoading: false,
   error: "",
   geoData: null,
