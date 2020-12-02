@@ -18,27 +18,27 @@ const reducer = (state, action) => {
         weatherData: action.payload,
       };
 
-    case "loading":
+    case "Loading":
       return {
         ...state,
         isLoading: true,
       };
 
-    case "zeroLatLong":
+    case "ZeroLatLong":
       return {
         ...state,
         lat: null,
         long: null,
       };
 
-    case "setLatLong":
+    case "SetLatLong":
       return {
         ...state,
         lat: action.payload.lat,
         long: action.payload.long,
       };
 
-    case "error":
+    case "Error":
       return {
         ...state,
         error: "App error state",

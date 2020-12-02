@@ -8,5 +8,10 @@ export default function CurrentLocationCard() {
   const appContext = useContext(AppContext);
   console.log(appContext);
 
-  return <div>Current Location Weather Card component</div>;
+  return (
+    <>
+      <div>Current Location Weather Card component</div>
+      <h1>{}</h1>
+    </>
+  );
 }

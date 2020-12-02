@@ -1,4 +1,4 @@
 module.exports = {
-  key: "356a11fede4eeba03f493c498fa5f496",
-  base: "https://api.openweathermap.org/data/2.5/",
+  key: "26c0d9fa22674648a58dd1eeaf2a4d37",
+  base: "https://api.weatherbit.io/v2.0/",
 };
