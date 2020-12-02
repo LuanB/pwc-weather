@@ -6,6 +6,8 @@ const initialState = {
   isLoading: false,
   error: "",
   geoData: null,
+  lat: null,
+  long: null,
 };
 
 export const AppContext = createContext();

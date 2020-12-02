@@ -1,24 +1,24 @@
 import React, { useEffect, useContext } from "react";
-import useGeolocation from "react-hook-geolocation";
-import { DispatchContext } from "../../context/appContext";
 
+import WeatherCard from "../WeatherCard";
+import CurrentLocationCard from "../CurrentLocationCard";
+import { DispatchContext } from "../../context/appContext";
 import "./WeatherWidgetContainerStyles.css";
 
 export default function WeatherWidgetContainer() {
-  setTimeout(() => {
-    getLocation();
-  }, 1000);
+  useEffect(() => {
+    setTimeout(() => {
+      getLocation();
+    }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const dispatch = useContext(DispatchContext);
-
-  // dispatch({ type: "SetGeoData", payload: geolocation });
-
-  // console.log(geolocation);
 
   const getLocation = async () => {
     await navigator.geolocation.getCurrentPosition(
       (position) => {
-        dispatch({ type: "error", payload: position });
+        dispatch({ type: "SetGeoData", payload: position });
         console.log(position);
       },
       (error) => {
@@ -32,7 +32,8 @@ export default function WeatherWidgetContainer() {
   return (
     <>
       <div>weather widget container</div>
-      {/* <div>location is {geolocation.latitude}</div> */}
+      <CurrentLocationCard />
+      <WeatherCard />
     </>
   );
 }

@@ -3,7 +3,13 @@ const reducer = (state, action) => {
     case "SetGeoData":
       return {
         ...state,
-        // geoData: action.payload,
+        geoData: action.payload,
+      };
+
+    case "SetCurrentWeather":
+      return {
+        ...state,
+        currentWeather: action.payload,
       };
 
     case "SetWeatherData":
@@ -16,6 +22,20 @@ const reducer = (state, action) => {
       return {
         ...state,
         isLoading: true,
+      };
+
+    case "zeroLatLong":
+      return {
+        ...state,
+        lat: null,
+        long: null,
+      };
+
+    case "setLatLong":
+      return {
+        ...state,
+        lat: action.payload.lat,
+        long: action.payload.long,
       };
 
     case "error":
