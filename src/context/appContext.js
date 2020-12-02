@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useReducer } from "react";
 import weatherAppReducer from "../reducers/weatherAppReducer";
 
 const initialState = {
@@ -12,7 +12,7 @@ export const AppContext = createContext();
 export const DispatchContext = createContext();
 
 export function AppContextProvider(props) {
-  const [appContext, dispatch] = useState(initialState, weatherAppReducer);
+  const [appContext, dispatch] = useReducer(initialState, weatherAppReducer);
   return (
     <AppContext.Provider value={appContext}>
       <DispatchContext.Provider value={dispatch}>
