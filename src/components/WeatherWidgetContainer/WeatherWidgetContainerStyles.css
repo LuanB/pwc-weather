@@ -1,0 +1,24 @@
+.WidgetContainer {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "SideWeather Humidity Search"
+    "WeatherCard WeatherCard WeatherCard";
+}
+
+.Humidity {
+  grid-area: Humidity;
+  background-color: aqua;
+}
+
+.Search {
+  grid-area: Search;
+  background-color: beige;
+}
+
+.WeatherCard {
+  grid-area: WeatherCard;
+  background-color: cadetblue;
+}

@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import Container from "@material-ui/core/Container";
 
 import CurrentLocationCard from "../CurrentLocationCard";
 import { AppContext, DispatchContext } from "../../context/appContext";
@@ -9,6 +8,7 @@ import axios from "axios";
 import WeatherCardContainer from "../WeatherCardContainer";
 
 import { mockCurrentWeather, mockForecastData } from "../../utils/utils";
+import HumidityDataCard from "../HumidityDataCard";
 
 export default function WeatherWidgetContainer() {
   // We get the location of the user. then set this data into context.
@@ -91,12 +91,19 @@ export default function WeatherWidgetContainer() {
   };
 
   return (
-    <>
-      <Container maxWidth="sm">
-        <div>weather widget container</div>
+    <div className="WidgetContainer">
+      <div className="CurrentWeatherCard SideWeather">
         <CurrentLocationCard />
+      </div>
+      <div className="Humidity">
+        <HumidityDataCard />
+      </div>
+      <div className="Search">
+        <h1>search box</h1>
+      </div>
+      <div className="WeatherCard">
         <WeatherCardContainer />
-      </Container>
-    </>
+      </div>
+    </div>
   );
 }
