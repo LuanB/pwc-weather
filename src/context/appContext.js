@@ -12,7 +12,8 @@ export const AppContext = createContext();
 export const DispatchContext = createContext();
 
 export function AppContextProvider(props) {
-  const [appContext, dispatch] = useReducer(initialState, weatherAppReducer);
+  const [appContext, dispatch] = useReducer(weatherAppReducer, initialState);
+
   return (
     <AppContext.Provider value={appContext}>
       <DispatchContext.Provider value={dispatch}>

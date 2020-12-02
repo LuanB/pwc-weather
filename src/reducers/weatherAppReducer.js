@@ -1,32 +1,32 @@
-const weatherAppReducer = (state, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
-    case "SetGeoData": {
+    case "SetGeoData":
       return {
         ...state,
-        geoData: action.payload,
+        // geoData: action.payload,
       };
-    }
-    case "SetWeatherData": {
+
+    case "SetWeatherData":
       return {
         ...state,
         weatherData: action.payload,
       };
-    }
-    case "loading": {
+
+    case "loading":
       return {
         ...state,
         isLoading: true,
       };
-    }
-    case "error": {
+
+    case "error":
       return {
         ...state,
         error: "App error state",
         isLoading: false,
       };
-    }
+
     default:
       return state;
   }
 };
-export default weatherAppReducer;
+export default reducer;
