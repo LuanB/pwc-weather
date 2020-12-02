@@ -18,6 +18,12 @@ const reducer = (state, action) => {
         forecastWeatherData: action.payload,
       };
 
+    case "SetCity":
+      return {
+        ...state,
+        city: action.payload,
+      };
+
     case "Loading":
       return {
         ...state,

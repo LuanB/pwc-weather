@@ -9,6 +9,7 @@ import WeatherCardContainer from "../WeatherCardContainer";
 
 import { mockCurrentWeather, mockForecastData } from "../../utils/utils";
 import HumidityDataCard from "../HumidityDataCard";
+import SearchContainer from "../SearchContainer";
 
 export default function WeatherWidgetContainer() {
   // We get the location of the user. then set this data into context.
@@ -99,7 +100,7 @@ export default function WeatherWidgetContainer() {
         <HumidityDataCard />
       </div>
       <div className="Search">
-        <h1>search box</h1>
+        <SearchContainer />
       </div>
       <div className="WeatherCard">
         <WeatherCardContainer />

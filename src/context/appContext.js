@@ -8,6 +8,7 @@ const initialState = {
   geoData: null,
   lat: null,
   long: null,
+  city: null,
 };
 
 export const AppContext = createContext();
