@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from "react";
+import Container from "@material-ui/core/Container";
 
 import CurrentLocationCard from "../CurrentLocationCard";
 import { AppContext, DispatchContext } from "../../context/appContext";
@@ -6,6 +7,8 @@ import "./WeatherWidgetContainerStyles.css";
 import apiKeys from "../../utils/apiKeys";
 import axios from "axios";
 import WeatherCardContainer from "../WeatherCardContainer";
+
+import { mockCurrentWeather, mockForecastData } from "../../utils/utils";
 
 export default function WeatherWidgetContainer() {
   // We get the location of the user. then set this data into context.
@@ -59,13 +62,14 @@ export default function WeatherWidgetContainer() {
   const SetCurrentLocationWeather = async (lat, long) => {
     try {
       console.log("context in Get current location weather is ", appContext);
-      const data = await axios(
-        `${apiKeys.base}current?key=${apiKeys.key}&lat=${lat}&lon=${long}`
-      );
-      //const json = await res.json();
-      console.log("data is ", data);
+      // const data = await axios(
+      //   `${apiKeys.base}current?key=${apiKeys.key}&lat=${lat}&lon=${long}`
+      // );
 
-      dispatch({ type: "SetCurrentWeather", payload: data.data.data[0] });
+      // console.log("data is ", data);
+
+      // dispatch({ type: "SetCurrentWeather", payload: data.data.data[0] });
+      dispatch({ type: "SetCurrentWeather", payload: mockCurrentWeather });
     } catch (error) {
       console.log(error);
     }
@@ -73,13 +77,14 @@ export default function WeatherWidgetContainer() {
 
   const SetForcastWeather = async (lat, long) => {
     try {
-      const data = await axios(
-        `${apiKeys.base}forecast/daily?key=${apiKeys.key}&lat=${lat}&lon=${long}&days=7`
-      );
+      // const data = await axios(
+      //   `${apiKeys.base}forecast/daily?key=${apiKeys.key}&lat=${lat}&lon=${long}&days=7`
+      // );
 
-      console.log("FORECASE data is ", data);
+      //  console.log("FORECASE data is ", data);
 
-      dispatch({ type: "SetForecastWeatherData", payload: data.data.data });
+      //  dispatch({ type: "SetForecastWeatherData", payload: data.data.data });
+      dispatch({ type: "SetForecastWeatherData", payload: mockForecastData });
     } catch (error) {
       console.log(error);
     }
@@ -87,9 +92,11 @@ export default function WeatherWidgetContainer() {
 
   return (
     <>
-      <div>weather widget container</div>
-      <CurrentLocationCard />
-      <WeatherCardContainer />
+      <Container maxWidth="sm">
+        <div>weather widget container</div>
+        <CurrentLocationCard />
+        <WeatherCardContainer />
+      </Container>
     </>
   );
 }
