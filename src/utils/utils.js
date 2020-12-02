@@ -1,3 +1,8 @@
+export const ConvertToFahrenheit = (degsC) => {
+  const fah = (degsC * 9) / 5 + 32;
+  return fah.toFixed(1);
+};
+
 export const mockForecastData = [
   {
     moonrise_ts: 1606910797,

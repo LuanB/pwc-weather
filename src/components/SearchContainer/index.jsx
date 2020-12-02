@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import Switch from "react-switch";
 
 import { DispatchContext, AppContext } from "../../context/appContext";
@@ -8,12 +8,18 @@ import TextField from "@material-ui/core/TextField";
 import "./SearchContainerStyles.css";
 
 export default function SearchContainer() {
+  // Accessibility using Ref
+  const editCityRef = useRef(null);
   const [value, handleChange, reset] = useInputState("");
 
   const dispatch = useContext(DispatchContext);
   const appContext = useContext(AppContext);
 
   const [state, toggle] = useToggle(appContext.metric);
+
+  useEffect(() => {
+    editCityRef.current.focus();
+  }, []);
 
   const handleSwitchChange = () => {
     toggle();
@@ -30,13 +36,17 @@ export default function SearchContainer() {
             reset();
           }}
         >
+          <label for="CityText">City Search - Australian City only</label>
           <TextField
+            id="CityText"
+            inputRef={editCityRef}
             value={value}
             onChange={handleChange}
             margin="normal"
             label="Search City: ONLY AUSTRALIAN CITIES-Perth, Sydney, Melbourne, etc"
             fullWidth
           />
+          <span id="CityText-helper-text">Australian City Only</span>
         </form>
       </div>
 

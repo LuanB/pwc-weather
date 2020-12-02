@@ -26,6 +26,7 @@ export default function WeatherCardContainer() {
               max_temp={weather.max_temp}
               min_temp={weather.min_temp}
               uv={weather.uv}
+              metric={appContext.metric}
             />
           </div>
         ))
