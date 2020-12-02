@@ -44,6 +44,12 @@ const reducer = (state, action) => {
         long: action.payload.long,
       };
 
+    case "SetMetric":
+      return {
+        ...state,
+        metric: action.payload,
+      };
+
     case "Error":
       return {
         ...state,

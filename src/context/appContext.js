@@ -9,6 +9,7 @@ const initialState = {
   lat: null,
   long: null,
   city: null,
+  metric: true,
 };
 
 export const AppContext = createContext();
