@@ -21,7 +21,7 @@ export default function SearchContainer() {
           value={value}
           onChange={handleChange}
           margin="normal"
-          label="Search City Weather"
+          label="Search City: ONLY AUSTRALIAN CITIES-Perth, Sydney, Melbourne, etc"
           fullWidth
         />
       </form>

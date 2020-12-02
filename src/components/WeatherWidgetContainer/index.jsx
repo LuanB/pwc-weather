@@ -34,10 +34,15 @@ export default function WeatherWidgetContainer() {
     }
   }, [appContext.lat]);
 
-  const getLocation = async () => {
-    let lat;
-    let long;
+  // watch for city changes if the user searches a new city then update lat long
 
+  useEffect(() => {
+    if (appContext.city) {
+      SetLatLongForCity(appContext.city);
+    }
+  }, [appContext.city]);
+
+  const getLocation = async () => {
     await navigator.geolocation.getCurrentPosition(
       (position) => {
         dispatch({ type: "SetGeoData", payload: position });
@@ -62,7 +67,7 @@ export default function WeatherWidgetContainer() {
 
   const SetCurrentLocationWeather = async (lat, long) => {
     try {
-      console.log("context in Get current location weather is ", appContext);
+      // console.log("context in Get current location weather is ", appContext);
       // const data = await axios(
       //   `${apiKeys.base}current?key=${apiKeys.key}&lat=${lat}&lon=${long}`
       // );
@@ -82,10 +87,27 @@ export default function WeatherWidgetContainer() {
       //   `${apiKeys.base}forecast/daily?key=${apiKeys.key}&lat=${lat}&lon=${long}&days=7`
       // );
 
-      //  console.log("FORECASE data is ", data);
+      // console.log("FORECASE data is ", data);
 
-      //  dispatch({ type: "SetForecastWeatherData", payload: data.data.data });
+      // dispatch({ type: "SetForecastWeatherData", payload: data.data.data });
       dispatch({ type: "SetForecastWeatherData", payload: mockForecastData });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const SetLatLongForCity = async (city) => {
+    try {
+      // const data = await axios(
+      //   `${apiKeys.base}current?city=${city}&country=au&key=${apiKeys.key}`
+      // );
+      // dispatch({
+      //   type: "SetLatLong",
+      //   payload: {
+      //     lat: data.data.data[0].lat,
+      //     long: data.data.data[0].lon,
+      //   },
+      // });
     } catch (error) {
       console.log(error);
     }
