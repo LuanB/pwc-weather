@@ -67,15 +67,13 @@ export default function WeatherWidgetContainer() {
 
   const SetCurrentLocationWeather = async (lat, long) => {
     try {
-      // console.log("context in Get current location weather is ", appContext);
-      // const data = await axios(
-      //   `${apiKeys.base}current?key=${apiKeys.key}&lat=${lat}&lon=${long}`
-      // );
+      console.log("context in Get current location weather is ", appContext);
+      const data = await axios(
+        `${apiKeys.base}current?key=${apiKeys.key}&lat=${lat}&lon=${long}`
+      );
 
-      // console.log("data is ", data);
-
-      // dispatch({ type: "SetCurrentWeather", payload: data.data.data[0] });
-      dispatch({ type: "SetCurrentWeather", payload: mockCurrentWeather });
+      dispatch({ type: "SetCurrentWeather", payload: data.data.data[0] });
+      // dispatch({ type: "SetCurrentWeather", payload: mockCurrentWeather });
     } catch (error) {
       console.log(error);
     }
@@ -83,14 +81,12 @@ export default function WeatherWidgetContainer() {
 
   const SetForcastWeather = async (lat, long) => {
     try {
-      // const data = await axios(
-      //   `${apiKeys.base}forecast/daily?key=${apiKeys.key}&lat=${lat}&lon=${long}&days=7`
-      // );
+      const data = await axios(
+        `${apiKeys.base}forecast/daily?key=${apiKeys.key}&lat=${lat}&lon=${long}&days=7`
+      );
 
-      // console.log("FORECASE data is ", data);
-
-      // dispatch({ type: "SetForecastWeatherData", payload: data.data.data });
-      dispatch({ type: "SetForecastWeatherData", payload: mockForecastData });
+      dispatch({ type: "SetForecastWeatherData", payload: data.data.data });
+      // dispatch({ type: "SetForecastWeatherData", payload: mockForecastData });
     } catch (error) {
       console.log(error);
     }
@@ -98,16 +94,16 @@ export default function WeatherWidgetContainer() {
 
   const SetLatLongForCity = async (city) => {
     try {
-      // const data = await axios(
-      //   `${apiKeys.base}current?city=${city}&country=au&key=${apiKeys.key}`
-      // );
-      // dispatch({
-      //   type: "SetLatLong",
-      //   payload: {
-      //     lat: data.data.data[0].lat,
-      //     long: data.data.data[0].lon,
-      //   },
-      // });
+      const data = await axios(
+        `${apiKeys.base}current?city=${city}&country=au&key=${apiKeys.key}`
+      );
+      dispatch({
+        type: "SetLatLong",
+        payload: {
+          lat: data.data.data[0].lat,
+          long: data.data.data[0].lon,
+        },
+      });
     } catch (error) {
       console.log(error);
     }
